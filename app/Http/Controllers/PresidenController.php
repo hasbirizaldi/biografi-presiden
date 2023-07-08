@@ -16,12 +16,24 @@ class PresidenController extends Controller
      */
     public function index(Request $request):View
     {
-        if($request->filled('search')){
-            $presidents = Presiden::search($request->search)->paginate(5)->withQueryString();
-        }else{
-            $presidents = Presiden::first()->paginate(5);
-        }
+
+        $presidents = Presiden::first()->when(request()->query('search'), function($query){
+
+            $search = request()->query('search');
+            return $query->where('nama_tokoh', 'LIKE', "%{$search}%");
+        })->paginate(5);
+
+
         return view('biografi.index', compact('presidents'));
+
+
+        // $search = request()->query('search'); 
+        // if($request->filled('search')){
+        //     $presidents = Presiden::search($request->search)->paginate(5);
+        // }else{
+        //     $presidents = Presiden::latest()->paginate(5);
+        // }
+        // $presidents = Presiden::latest()->paginate(5);
     }
 
     /**
@@ -68,6 +80,8 @@ class PresidenController extends Controller
     public function show(string $id)
     {
         $presiden = Presiden::findOrFail($id);
+        
+        
 
         return view('biografi.show', compact('presiden'));
     }

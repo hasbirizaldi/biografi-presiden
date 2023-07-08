@@ -22,10 +22,10 @@ class Presiden extends Model
     public function toSearchableArray()
     {
         return [
-            'nama_tokoh' => $this->nama_tokoh,
-            'orientasi' => $this->orientasi,
-            'peristiwa_penting' => $this->peristiwa_penting,
-            'reorientasi' => $this->reorientasi
+            'nama_tokoh' => $this->nama_tokoh
+            // 'orientasi' => $this->orientasi,
+            // 'peristiwa_penting' => $this->peristiwa_penting,
+            // 'reorientasi' => $this->reorientasi
         ];
     }
 }

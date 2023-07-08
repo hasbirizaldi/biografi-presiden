@@ -18,4 +18,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('/presiden', \App\Http\Controllers\PresidenController::class);
+Route::resource('/presiden', PresidenController::class);
